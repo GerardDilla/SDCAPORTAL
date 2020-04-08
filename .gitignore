@@ -49,3 +49,6 @@ composer.lock
 
 
 application/config/database.php
+
+C_editor
+Profile
