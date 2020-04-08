@@ -10,9 +10,9 @@ application/logs/*
 
 composer.lock
 
-/Bootstrap/*
-/JS/*
-/jquery-ui-1.12.0/*
+Bootstrap/*
+JS/*
+jquery-ui-1.12.0/*
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
