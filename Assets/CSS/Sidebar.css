@@ -1,0 +1,233 @@
+@charset "utf-8";
+#sidebar-wrapper {
+    z-index: 1;
+    position: absolute;
+	width: 250px;
+	height:100%;
+   	min-height:150px;
+    overflow-y: ;hidden;
+    background: #2C3E50;
+    opacity: 0.9;
+	
+	
+	
+	
+}
+
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding-left: 250px;
+ 
+}
+
+
+
+#wrapper.menuDisplayed #sidebar-wrapper {
+    width: 0;
+	
+}
+
+
+#wrapper.menuDisplayed #page-content-wrapper {
+	padding-left: 0px;
+}
+#wrapper.menuDisplayed #alignment{
+	margin-left:auto; 
+	margin-right:auto; 
+	padding-left:0px; 
+	padding-right:0px;
+	}
+#wrapper.menuDisplayed #sidebarfix{
+	
+	display:none;
+	}
+#fixtoggle{
+	position:fixed;
+	}
+#alignment{
+	margin-left:auto; 
+	margin-right:auto; 
+	padding-left:50px; 
+	padding-right:300px;
+	}
+	
+#sidebarfix{
+	position:fixed;
+	max-width:250px;
+	min-width:250px;
+	margin-top:auto;
+	margin-bottom:auto;
+	height:100%;
+	background-color:#333;
+}
+
+.sidebar-nav {
+    padding: 0px;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+	background-color:#fff;
+	
+
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+	background: #333;
+	
+	
+}
+
+.sidebar-nav li a:hover {
+    margin-left:5px;	
+	transition: all 0.5s;
+	background-color:#cc0000;
+	color:#fff;
+	
+}
+.sidebar-nav li:hover {
+	color:#666;
+	
+}
+
+#AccountThumbnail{
+	border-radius:50%;
+	max-width:90px;
+	max-height:90px;
+	min-width:90px;
+	min-height:90px;
+	text-align: center;
+	display: block;
+	margin-top: 50px;
+	margin-bottom: 30px;
+	border: 2px solid #ddd;
+	margin-right: auto;
+	margin-left: auto;
+	background-position:center; 
+	background-repeat:no-repeat;  
+	background-size:cover;
+	
+}
+#changepic{
+	
+	border-radius:50%; 
+	color:#FFF; 
+	height:30px; 
+	background: #2C3E50; 
+	top:-10;
+	left:45px;
+	
+	}
+.notifbell{
+	border-radius:50%; 
+	height:30px;
+	width:30px;
+	color:#FFF;
+	font-size:18px;
+	background: #2C3E50; 
+	position:fixed;
+	margin-top:60px;
+	margin-left:20px;
+	cursor:pointer;
+	line-height:30px;
+	text-align:center;
+	}
+.notifbell:hover{
+	 box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+	}
+#page-content-wrapper{
+	display:block;
+
+	}
+
+@media only screen and (min-width: 770px){
+		#wrapper.menuDisplayed #sidebar-wrapper{
+			width:250px;
+			
+		}
+		#wrapper.menuDisplayed #page-content-wrapper {
+			padding-left: 250px;
+			display:block;
+			width:100%;
+			
+		}
+		#wrapper.menuDisplayed #sidebarfix{
+			display:block;
+			
+		}
+		#wrapper.menuDisplayed .navbar-inverse{
+			display:none;
+			}
+		
+}
+@media only screen and (max-width: 500px){
+	#wrapper.menuDisplayed #sidebar-wrapper{
+			width:80%;
+			display:block;
+			transition: all 0.5s;
+			
+			
+		}
+		#wrapper.menuDisplayed #page-content-wrapper {
+		
+			background-image:url('http://www.chidi.com/images/canvas/abstract/trailsofdream.jpg');
+    		background-size:cover;
+    		-webkit-filter: blur(4px);
+    		-moz-filter: blur(4px);
+    		-ms-filter: blur(4px);
+    		-o-filter: blur(4px);
+    		filter: blur(4px);
+			width:100%;
+			
+		}
+		#wrapper.menuDisplayed #sidebarfix{
+			
+			box-shadow: 4px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
+			display:block;
+			width:80%;
+			max-width:100%;
+			background: ;
+		   
+			
+		}
+	
+	#sidebar-wrapper {
+		
+			width:0px;	
+		}
+	#sidebarfix{
+			display:none;
+			width:90%;
+			
+		}
+	#page-content-wrapper {
+			padding-left: 0px;
+			display:block;
+			max-width:100%;
+			width:100%;
+			
+		}
+	#alignment{
+		margin-left:auto; 
+		margin-right:auto;
+		padding:0px;
+		padding-top:20px;
+		}
+}
+@media only screen and (max-height: 550px) {
+    #sidebarfix {
+        position:static;
+		width:250px;
+		
+    }
+	.notifbell{
+		position:absolute;
+		}
+}

@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+#sidebarfix{
+
+	background-image:url(../img/starstheme.jpg);
+	background-size:cover;
+	
+}
+.sidebar-nav li {
+
+	background-color:#fff;
+
+}
+.sidebar-nav li a {
+
+    color: #fff;
+	background-image:url(../img/starstheme.jpg);
+	
+	
+}
+.sidebar-nav li a:hover {
+
+	background-color:#666;
+	color:#fff;
+	
+}
+.sidebar-nav li:hover {
+	color:#fff;
+	
+}
+#sidebar-wrapper {
+
+    background-image:url(../img/startheme2.jpg);
+	background-size:cover;
+    opacity: 0.9;
+
+}
+.navbar-inverse{
+	
+	background-image:url(../img/startheme2.jpg);
+	background-size:cover;
+	}
+

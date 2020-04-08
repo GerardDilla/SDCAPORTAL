@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+
+#sidebarfix{
+
+	background-color:#000;
+}
+.sidebar-nav li {
+
+	background-color:#fff;
+
+}
+.sidebar-nav li a {
+
+    color: #fff;
+	background: #000;
+}
+.sidebar-nav li a:hover {
+
+	background-color:#666;
+	color:#fff;
+	
+}
+.sidebar-nav li:hover {
+	color:#fff;
+	
+}
+#sidebar-wrapper {
+
+    background: #000;
+    opacity: 0.9;
+
+}
+.navbar-inverse{
+	
+	background: #000;
+	}
+

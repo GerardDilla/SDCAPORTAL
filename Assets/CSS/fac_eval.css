@@ -1,0 +1,17 @@
+div#evalSem{
+	color: green;
+	font-size: 20px;
+}
+
+.evalSem{
+	color: red;
+}
+	
+#evalSy{
+  color: green;
+	font-size: 20px; 
+	padding-left:60px;
+}
+.evalSy{
+	color: red;
+}

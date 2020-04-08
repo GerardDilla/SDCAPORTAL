@@ -1,0 +1,164 @@
+<link href="../../TestProject/Dropdown.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+
+@import url("styles.css");
+#Minlogo {
+	position:absolute;
+	left:219px;
+	top:0px;
+	width:50px;
+	height:40px;
+	z-index:101;
+}
+#ribbon {
+	position:absolute;
+	top:591px;
+	width:844px;
+	height:38px;
+	z-index:60;
+	background-image: url(navbar.png);
+	margin: auto;
+	left: 19%;
+	text-align: center;
+	border-top-width: thin;
+	border-right-width: thin;
+	border-bottom-width: thin;
+	border-left-width: thin;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #999;
+	border-right-color: #999;
+	border-bottom-color: #999;
+	border-left-color: #999;
+}
+#EventCalendar  {
+	position:absolute;
+	left: 6%;
+	top: -14px;
+	
+}
+#Curriculum  {
+	position:absolute;
+	left: 30%;
+	top: -14px;
+	
+}
+#ClassSchedule  {
+	position:absolute;
+	left: 54%;
+	top: -14px;
+	
+}
+#StudentInformation {
+	position:absolute;
+	left: 78%;
+	top: -14px;
+	
+	
+}
+.directory{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	text-align: center;
+	color: #FFF;
+	line-height: 37px;
+	background-image: url(navbar.png);
+	width:138px;
+	height:37px;
+	z-index:102;
+	border-radius: 4px;
+  
+	}
+.directory:hover {
+	background-color: #333;
+	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: move; 
+    -webkit-animation-duration: 1s;
+	animation-name: move;
+    animation-duration: 1s;
+	}
+@-webkit-keyframes move{
+	
+	25%{top:1px;}
+	
+	} 	
+
+</style>
+<script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="jquery-ui-1.12.0/jquery-ui.js"></script>
+<script type="text/javascript">
+function delay(){setTimeout(Slider,5000);}
+</script>
+<script type="text/javascript" src="Imageslider.js"></script>
+<script type="text/javascript">
+</script>
+
+
+
+
+<body onLoad="delay();" onLoad="Slider();">
+<div id="Menu">
+<div id="Features">
+<div id="Drop"><div id="Table">
+<ul>
+  <div class="Dropslide">
+  <li> <a href="#">Features</a>
+  <ul>
+  <li><a href="#">Event Calendar</a></li>
+  <li><a href="#">Curriculum</a></li>
+  <li><a href="#">Class Schedule</a></li>
+  <li><a href="#">Scholarship Form</a></li> 
+  </ul>
+  </li></div>
+</ul>
+
+</div><!--Table-->
+</div><!--Drop-->
+</div><!--Features-->
+
+<div id="Profile">
+<div id="Drop"><div id="Table">
+<ul>
+  <div class="Dropslide">
+  <li> <a href="#">Profile</a>
+  <ul>
+  <li><a href="#">Grades</a></li>
+  <li><a href="#">Balance</a></li>
+  <li><a href="#">Achievements</a></li>
+  <li><a href="#">Requirements</a></li> 
+  </ul>
+  </li></div>
+</ul>
+
+</div><!--Table-->
+</div><!--Drop-->
+</div><!--Profile-->
+<div id="Homefont"><a href="index.html">Student Portal</a></div>
+</div><!--Menu-->
+<div class="slider">
+  <img id="1" src="pic1.png" border="0" alt="1"/>
+  <img id="2" src="pic2.png"  border="0" alt="2"/>
+  <img id="3" src="pic3.png" border="0" alt="3"/>
+</div>
+<div id="shadow"></div>
+<div id="undershadow"></div>
+
+
+
+<div id="Minlogo"></div>
+</div>
+<div id="ribbon">
+<div class="directory" id="EventCalendar" onclick="scroll();" style="cursor:pointer">Event Calendar</div>
+<div class="directory" id="Curriculum" onclick="scroll();" style="cursor:pointer">Curriculum</div>
+<div class="directory" id="ClassSchedule" onclick="scroll();" style="cursor:pointer">Class Schedule</div>
+<div class="directory" id="StudentInformation" onclick="scroll();" style="cursor:pointer">Student Info</div>
+<script>function scroll(){window.scrollTo(0,800);}</script>
+</div>
+<div id="Bodycontainer"></div>
+</body>
+
+
+</html>
