@@ -76,7 +76,7 @@ public function U_Log()
 						'Tel_No' => $query_content->Tel_No,
 						'Student_Number' => $query_content->Student_Number,
 						'Reference_Number' => $query_content->Reference_Number,
-						'picture' => $query2cont->Account_Picture,
+						'picture' => $query2cont->Account_picture,
 						'Account_Number' => $AN,
 						'Entrance_SchoolYear' => $query_content->Entrance_SchoolYear
 						

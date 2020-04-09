@@ -85,37 +85,6 @@ class Student extends CI_Controller {
 		$data['Bal_Schoolyear'] = $legend[0]['School_Year'];
 		$data['Bal_Semester'] = $legend[0]['Semester'];
 
-
-		/*
-		$rn = $this->session->userdata('Reference_Number');
-		//echo 'RN: '.$rn;
-		$latestbal = $this->Balance_model->GetLatestBalDate_query($rn);
-		if($latestbal->num_rows() == 0){
-			//echo 'no result';
-			return;
-		}
-		foreach($latestbal->result_array() as $latestbal_row){
-			$sy = $latestbal_row['schoolyear'];
-			$sem = $latestbal_row['semester'];
-		}
-		//echo $sy.' '.$sem.'<br>';
-		$outstanding = $this->Balance_model->check_Outstandingbal($rn,$sy,$sem);
-		$totalpaid = $this->Balance_model->check_totalpaid($rn,$sy,$sem);
-		foreach($outstanding->result_array() as $outstanding_row){
-			$ob = $outstanding_row['Fees'];
-		}
-		foreach($totalpaid->result_array() as $totalpaid_row){
-			$tp = $totalpaid_row['AmountofPayment'];
-		}
-		//echo $ob.' '.$tp.'<br>';
-		$bal_check = $ob - $tp;
-		if($bal_check <= 0){
-			$bal_check = 0.00;
-		}
-		*/
-
-		//Runs command when there 
-
 			
 			$data['resultSY'] = $this->Grades_model->getSY();
 			$data['Grade_Output'] = $this->Grades_model->getGrades();
@@ -131,9 +100,6 @@ class Student extends CI_Controller {
 				$data['error'] = "You must Login first";
 				$this->load->view('Portalhome',$data);
 				}	
-
-		
-
 		
 		
 	}
@@ -836,27 +802,28 @@ class Student extends CI_Controller {
 
 	////// RMUSIC AND CUSTOM////
 	
-        public function  Customer_Satisfactory()
-		{
-		
+	public function  Customer_Satisfactory()
+	{
+	
 		$this->load->model('User_login');
 		$data['pass'] = $this->User_login->jumpcheck();
 		$data['error'] = "";
 		$data['active'] = "1";
 		if($data['pass'] == 1){
-	
-	    
-	    $this->load->model('User_cus_sat_model');
-	    $data['getform'] = $this->User_cus_sat_model->getform();
-	    $this->load->view('User_header',$data);
+		
+		$this->load->model('User_cus_sat_model');
+		$data['getform'] = $this->User_cus_sat_model->getform();
+		$this->load->view('User_header',$data);
 		$this->load->view('User_Customer_Eval',$data);
 		$this->load->view('User_footer');
-	    	
+			
 		}else{
+
 			$data['error'] = "You must Login first";
 			$this->load->view('Portalhome',$data);
-			}
+			
 		}
+	}
 	
 	public function Insert_Answer()
                          {
@@ -866,7 +833,28 @@ class Student extends CI_Controller {
 				        redirect('Student/Profile','refresh');
                          }
        
-       ////// RMUSIC AND CUSTOM////
+	   ////// RMUSIC AND CUSTOM////
+	   
+	public function Payment(){
+
+		$this->load->model('User_login');
+		$data['pass'] = $this->User_login->jumpcheck();
+		$data['error'] = "";
+		$data['active'] = "6";
+		if($data['pass'] == 1){
+		
+
+		$this->load->view('User_header',$data);
+		$this->load->view('User_payment',$data);
+			
+		}else{
+
+			$data['error'] = "You must Login first";
+			$this->load->view('Portalhome',$data);
+			
+		}
+
+	}
 
 	
 }

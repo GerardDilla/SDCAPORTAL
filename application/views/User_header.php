@@ -29,6 +29,7 @@ $grades = "";
 $balance = "";
 $sched = "";
 $awards = "";
+$payment = "";
 $sanctions = "";
 $req = "";
 $clearance = "";
@@ -52,7 +53,11 @@ else if($active == 4){
 else if($active == 5){
 	$awards = "margin-left:5px;";
 
-	}
+  }
+else if($active == 6){
+  $payment = "margin-left:5px;";
+
+  }
 else if($active == 6){
 	$sanctions = "margin-left:5px;";
 
@@ -479,6 +484,8 @@ $fileT = './Profile/';
     <li ><a style="<?php echo $sched; ?>" href="<?php echo base_url();?>index.php/Student/schedule">Schedule <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-dashboard pull-right"></span></a></li>
         
     <li ><a style="<?php echo $awards; ?>" href="<?php echo base_url();?>index.php/Student/awards">Awards <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
+
+    <li ><a style="<?php echo $payment; ?>" href="<?php echo base_url();?>index.php/Student/Payment">Payment <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
 
     <li ><a style="<?php echo $clearance; ?>" href="<?php echo base_url();?>index.php/Student/Clearance">Clearance <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-ok-sign pull-right"></span></a></li>
         
