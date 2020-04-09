@@ -311,6 +311,7 @@ input[type=submit]:hover{
 <link rel="stylesheet" href="<?php echo base_url();?>Assets/CSS/.css">
 <link rel="stylesheet" href="<?php echo base_url();?>Assets/fac_eval.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type=text/javascript src="https://wpp-test.wirecard.com/loader/paymentPage.js"></script>
     <script src="<?php echo base_url();?>JS/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>JS/Pace.js"></script>
     <script src="<?php echo base_url();?>JS/additem.js"></script>
@@ -318,6 +319,7 @@ input[type=submit]:hover{
     <script src='https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js'></script>
     <link rel="shortcut icon" href="<?php echo base_url();?>Assets/img/SoloLogo.png">
     <link rel="icon" href="<?php echo base_url();?>Assets/img/SoloLogo.png" type="image/gif"> 
+    
   
 
 </head>
@@ -485,7 +487,7 @@ $fileT = './Profile/';
         
     <li ><a style="<?php echo $awards; ?>" href="<?php echo base_url();?>index.php/Student/awards">Awards <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
 
-    <li ><a style="<?php echo $payment; ?>" href="<?php echo base_url();?>index.php/Student/Payment">Payment <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
+    <li ><a style="<?php echo $payment; ?>" href="<?php echo base_url();?>src/register/embedded.php?method=creditcard">Payment <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
 
     <li ><a style="<?php echo $clearance; ?>" href="<?php echo base_url();?>index.php/Student/Clearance">Clearance <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-ok-sign pull-right"></span></a></li>
         

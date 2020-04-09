@@ -1,5 +1,6 @@
 {
 	"description": "The CodeIgniter framework",
+	"keywords": ["payment", "credit card"],
 	"name": "codeigniter/framework",
 	"type": "project",
 	"homepage": "https://codeigniter.com",
@@ -11,12 +12,30 @@
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
 	"require": {
-		"php": ">=5.2.4"
+		"php": ">=7.2",
+		"ext-curl": "*",
+		"ext-json": "*",
+		"guzzlehttp/guzzle": "~6.0",
+		"php-http/guzzle6-adapter": "^1.1",
+		"wirecard/payment-sdk-php": "^4.0",
+		"monolog/monolog": "^1.23",
+		"chillerlan/php-qrcode": "dev-php5"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
 	"require-dev": {
-		"mikey179/vfsStream": "1.1.*"
-	}
+		"mikey179/vfsStream": "1.1.*",
+		"squizlabs/php_codesniffer": "^3.5"
+	},
+	"autoload": {
+		"files": [
+		  "src/config.php",
+		  "src/util/helperFunctions.php"
+		]
+	  },
+	  "scripts": {
+		"cs-check": "phpcs",
+		"cs-fix": "phpcbf"
+	  }
 }

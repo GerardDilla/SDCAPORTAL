@@ -834,15 +834,28 @@ class Student extends CI_Controller {
                          }
        
 	   ////// RMUSIC AND CUSTOM////
-	   
+	public function payreg(){
+
+		require_once '../../vendor/autoload.php';
+		require_once('base.php');
+
+		$paymentMethod = 'creditcard';
+		$payload = createPayload($paymentMethod);
+		$payload['options']['frame-ancestor'] = getBaseUrl();
+		if (retrievePaymentRedirectUrl($payload, $paymentMethod)) {
+			//redirect('Student/Payment');
+		}
+		
+	}
 	public function Payment(){
+
+
 
 		$this->load->model('User_login');
 		$data['pass'] = $this->User_login->jumpcheck();
 		$data['error'] = "";
 		$data['active'] = "6";
 		if($data['pass'] == 1){
-		
 
 		$this->load->view('User_header',$data);
 		$this->load->view('User_payment',$data);
