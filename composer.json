@@ -22,7 +22,7 @@
 		"chillerlan/php-qrcode": "dev-php5"
 	},
 	"suggest": {
-		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
+		"paragonie/random_compat": "Provides better  randomness in PHP 5.x"
 	},
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*",
@@ -33,7 +33,7 @@
 		  "src/config.php",
 		  "src/util/helperFunctions.php"
 		]
-	  },
+	  }, 
 	  "scripts": {
 		"cs-check": "phpcs",
 		"cs-fix": "phpcbf"

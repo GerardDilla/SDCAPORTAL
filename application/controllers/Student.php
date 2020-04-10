@@ -3,7 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends CI_Controller {
 
-	
+	public function __construct() 
+    {
+		parent::__construct();
+		$this->load->library('wirecard');
+		
+	}
 	public function index()
 	{
 		
@@ -834,28 +839,69 @@ class Student extends CI_Controller {
                          }
        
 	   ////// RMUSIC AND CUSTOM////
-	public function payreg(){
+	private function payreg(){
 
-		require_once '../../vendor/autoload.php';
-		require_once('base.php');
-
+		$currency = 'USD';
+		$amount = '1000';
 		$paymentMethod = 'creditcard';
-		$payload = createPayload($paymentMethod);
+		$paymentdetails = '{
+			"payment": {
+			  "merchant-account-id": {
+				"value": "53f2895a-e4de-4e82-a813-0d87a10e55e6"
+			  },
+			  "account-holder": {
+				"first-name": "'.$this->session->userdata('First_Name').'",
+				"last-name": "'.$this->session->userdata('Last_Name').'"
+			  },
+			  "request-id": "",
+			  "requested-amount": {
+				"value": '.$amount.',
+				"currency": "'.$currency.'"
+			  },
+			  "transaction-type": "purchase",
+			  "three-d": {
+				"attempt-three-d": "true"
+			  },
+			  "notifications": {
+				"format": "application/xml",
+				"notification": [
+				  {
+					"url": "wpp-integration-demo-php/src/result/notify.php"
+				  }
+				]
+			  },
+			  "payment-methods": {
+				"payment-method": [
+				  {
+					"name": "'.$paymentMethod.'"
+				  }
+				]
+			  },
+			  "success-redirect-url": "SDCAPORTAL/index.php/Student/PaymentStatusMessage/success",
+			  "fail-redirect-url": "SDCAPORTAL/index.php/Student/PaymentStatusMessage/fail",
+			  "cancel-redirect-url": "SDCAPORTAL/index.php/Student/PaymentStatusMessage/cancel"
+			},
+			"options": {
+			  "frame-ancestor": ""
+			}
+		  }';
+		$payload = $this->wirecard->modifyPayload($paymentdetails);//createPayload($paymentMethod);
 		$payload['options']['frame-ancestor'] = getBaseUrl();
-		if (retrievePaymentRedirectUrl($payload, $paymentMethod)) {
-			//redirect('Student/Payment');
-		}
+		$this->wirecard->retrievePaymentRedirectUrl($payload, $paymentMethod);
+
+		//redirect(base_url().'src/register/embedded?method=creditcard');
 		
 	}
 	public function Payment(){
-
-
 
 		$this->load->model('User_login');
 		$data['pass'] = $this->User_login->jumpcheck();
 		$data['error'] = "";
 		$data['active'] = "6";
 		if($data['pass'] == 1){
+
+		//Sets up the payment link
+		$this->payreg();
 
 		$this->load->view('User_header',$data);
 		$this->load->view('User_payment',$data);
@@ -867,6 +913,24 @@ class Student extends CI_Controller {
 			
 		}
 
+	}
+	public function PaymentStatusMessage($status = ''){
+
+		if($status == ''){
+			return '';
+		}
+		if($status == 'success'){
+			$this->session->set_flashdata('message','Payment was successful!');
+		}
+		if($status == 'fail'){
+			$this->session->set_flashdata('message','Payment Failed and did not proceed');
+			return 'Payment Failed and did not proceed';
+		}
+		if($status == 'cancel'){
+			$this->session->set_flashdata('message','Payment was cancelled');
+		}
+		redirect(base_url().'index.php/Student/Payment');
+		
 	}
 
 	

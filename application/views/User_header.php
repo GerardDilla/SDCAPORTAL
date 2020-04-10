@@ -487,7 +487,7 @@ $fileT = './Profile/';
         
     <li ><a style="<?php echo $awards; ?>" href="<?php echo base_url();?>index.php/Student/awards">Awards <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
 
-    <li ><a style="<?php echo $payment; ?>" href="<?php echo base_url();?>src/register/embedded.php?method=creditcard">Payment <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
+    <li ><a style="<?php echo $payment; ?>" href="<?php echo base_url();?>index.php/Student/Payment">Payment <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-thumbs-up pull-right"></span></a></li>
 
     <li ><a style="<?php echo $clearance; ?>" href="<?php echo base_url();?>index.php/Student/Clearance">Clearance <span style="font-size:150%; margin-right:10px; margin-top:9px;" class="glyphicon glyphicon-ok-sign pull-right"></span></a></li>
         
