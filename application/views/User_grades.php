@@ -150,8 +150,8 @@ $(document).ready(function() {
     //Balance checker
     //Init_BalanceAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
     var userkey = "<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>";
-    var gradingAPI = 'http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/GradingAPI';
-    var balanceAPI = 'http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI';
+    var gradingAPI = 'https://www.stdominiccollege.edu.ph/SDCALMSv2/index.php/API/GradingAPI';
+    var balanceAPI = 'https://www.stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI';
 
     $("#btn_appear").click(function() {
         //Init_GradingAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/GradingAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');

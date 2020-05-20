@@ -112,13 +112,14 @@ $hide = "";
 <!-- Balance API Handler -->
 <script>
 $(document).ready(function() {
-    Init_BalanceAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI','<?php echo md5($this->session->userdata('Reference_Number')); ?>');
+    Init_BalanceAPI('https://www.stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI','<?php echo md5($this->session->userdata('Reference_Number')); ?>');
     //Init_BalanceAPI('http://10.0.0.52/SDCALMSv2/index.php/API/BalanceAPI','<?php echo md5($this->session->userdata('Reference_Number')); ?>');
 });
 </script>
 <!-- Balance API Handler -->
 
-<script>
+<script>senpai1320
+
 
 function Init_BalanceAPI(url='',refnum='')
 {   
