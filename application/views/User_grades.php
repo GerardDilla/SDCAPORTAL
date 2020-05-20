@@ -147,6 +147,7 @@
 <script>
 $(document).ready(function() {
 
+    $(".searchloader").hide();
     //Balance checker
     //Init_BalanceAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
     var userkey = "<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>";
@@ -444,10 +445,10 @@ $('.message_box').html(box);
 <!-- AJAX loading -->
 <script>
   $(document).ajaxStart(function() {
-  $(".searchloader").show();
+    $(".searchloader").show();
   });
   $(document).ajaxStop(function() {
-  $(".searchloader").hide();
+    $(".searchloader").hide();
   });
 </script>
 <!-- AJAX loading -->
