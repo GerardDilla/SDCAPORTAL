@@ -163,9 +163,7 @@ function Init_BalanceAPI(url='',refnum='')
         url: url,
         type: 'GET',
         data: {
-            Reference_Number: refnum,
-            School_Year: $('#SYlegend').val(),
-            Semester: $('#Semlegend').val()
+            Reference_Number: refnum
         },
         success: function(response){
 

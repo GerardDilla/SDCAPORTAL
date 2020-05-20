@@ -32,6 +32,10 @@
         <input type="hidden" name="SYlegend" id="SYlegend" value="<?php echo $Bal_Schoolyear; ?>"> 
         <input type="hidden" name="Semlegend" id="Semlegend" value="<?php echo $Bal_Semester; ?>"> 
         <!--Legends input -->
+
+    <div class="message_box">
+
+    </div>
       
     <div class="panel-group" id="accordion" style="min-width:250px;" ><!--accordion1--!-->
     <div class="panel panel-default" ><!--panel1--!-->
@@ -74,9 +78,7 @@
           </div>
         </div>
 
-        <div class="message_box">
-                           
-        </div>
+
 
         <button id="btn_appear" class="btn center-block" style="margin:auto; margin-bottom:30px; margin-top:20px; width:100px; display:none;" name="submit" id="submitD" type="button">Select</button>
         </form>
@@ -147,11 +149,13 @@ $(document).ready(function() {
 
     //Balance checker
     //Init_BalanceAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
-    Init_BalanceAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
+    var userkey = "<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>";
+    var gradingAPI = 'http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/GradingAPI';
+    var balanceAPI = 'http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI';
 
     $("#btn_appear").click(function() {
-        Init_GradingAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/GradingAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
-        //Init_GradingAPI('http://10.0.0.52/SDCALMSv2/index.php/API/GradingAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
+        //Init_GradingAPI('http://stdominiccollege.edu.ph/SDCALMSv2/index.php/API/GradingAPI','<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
+        Init_GradingAPI(gradingAPI,balanceAPI,'<?php echo $this->session->userdata('ENCRYPT_Reference_Number'); ?>');
     });
 
     $('#Schoolyear_Choice').change(function(){
@@ -218,10 +222,10 @@ function showcont(str) {
 }
 */
 
-function Init_GradingAPI(url='',refnum='')
+function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
 {   
     //console.log(url);
-    if(url == ''){
+    if(gradingapi == ''){
         config = {
             'message':'You must provide the API URL',
             'type':'warning'
@@ -258,21 +262,54 @@ function Init_GradingAPI(url='',refnum='')
         return;
     }
 
+    input = {
+        Reference_Number: refnum,
+        School_Year: $('#Schoolyear_Choice').val(),
+        Semester: $('#sel2').val()
+    }
     
     ajax = $.ajax({
-        url: url,
+        url: gradingapi,
         type: 'GET',
-        data: {
-            Reference_Number: refnum,
-            School_Year: $('#Schoolyear_Choice').val(),
-            Semester: $('#sel2').val()
-        },
+        data: input,
         success: function(response){
 
             result = JSON.parse(response);
             if(result['ResultCount']  != 0){
 
-              grading_display(result['data']);
+                BalanceChecker = Init_BalanceAPI(balanceapi,input);
+                BalanceChecker.done(function(balresult){
+
+                    balresult = JSON.parse(balresult);
+                    SemestralData = balresult['Output']['SemestralData'];
+                    console.log(SemestralData);
+                    if(SemestralData.length != 0){
+
+                        if(SemestralData[0]['balance'] > 1){
+                            balance_stopper();
+                            $('#gradingsheet').html('');
+                        }else{
+                            $('.message_box').html('');
+                            grading_display(result['data']);
+                        }
+                        
+
+                    }else{
+                        
+                        config = {
+                            'message':'Error: Could not find Balance data',
+                            'type':'warning'
+                        }
+                        message_handler(config);
+                        $('#gradingsheet').html('');
+
+
+                    }
+
+                });
+
+                
+
 
             }else{
 
@@ -304,9 +341,10 @@ function grading_display(resultdata)
     showtable.html('');
 
     $('.message_box').html('');
-
+    console.log(resultdata);
     $.each(resultdata, function(index, result) 
     {
+        
         row = $("<tr/>");
        
         row.append($("<td/>").text(result['Course_Code']));
@@ -323,10 +361,10 @@ function grading_display(resultdata)
     
 }
 
-function Init_BalanceAPI(url='',refnum='')
+function Init_BalanceAPI(balanceapi='',input={})
 {   
     //console.log(url);
-    if(url == ''){
+    if(balanceapi == ''){
         config = {
             'message':'Error: You must provide the API URL',
             'type':'warning'
@@ -334,87 +372,32 @@ function Init_BalanceAPI(url='',refnum='')
         message_handler(config);
         return;
     }
-    if(refnum == ''){
-       
-        //message_handler('No Token found');
-        config = {
-            'message':'Error: No Token found',
-            'type':'warning'
-        }
-        message_handler(config);
-        return;
-    }
-    if($('#SYlegend').val() == ''){
-        config = {
-            'message':'Error: No School Year passed',
-            'type':'warning'
-        }
-        message_handler(config);
-        return;
-    }
-    if($('#Semlegend').val() == ''){
-        config = {
-            'message':'Error: No Semester passed',
-            'type':'warning'
-        }
-        message_handler(config);
-        return;
-    }
-
-
-    ajax = $.ajax({
-        url: url,
+    return ajax = $.ajax({
+        url: balanceapi,
         type: 'GET',
-        data: {
-            Reference_Number: refnum,
-            School_Year: $('#SYlegend').val(),
-            Semester: $('#Semlegend').val()
-        },
-        success: function(response){
-
-            result = JSON.parse(response);
-            console.log(result);
-            if(result['Error'] == 0){
-                balance_stopper(result['Output']);
-
-            }else{
-                config = {
-                    'message':result['ErrorMessage'],
-                    'type':'warning'
-                }
-                message_handler(config);
-                return;
-            }
-            
-        },
-        fail: function(){
-
-            alert('Error: request failed');
-            return;
-
-        }
+        data: input,
     });
     
 }
-function balance_stopper(result){
+function balance_stopper(){
 
-      if(result['Previous_Balance'] > 1){
+    $balmessage = '\
+        <h2>\
+        It seems you still have a balance for this chosen semester, please settle the balance to view this semester\'s grade<br><br>\
+        </h2>\
+        <h3>\
+        View your balance <a href="<?php echo base_url(); ?>index.php/Student/Balance"><u>Here</u></a>\
+        </h3>\
+        <hr>\
+        Get in touch with us through our <a target="_blank" href="https://www.stdominiccollege.edu.ph/index.php/helpdesk"><u>Helpdesk</u></a> if you have concerns, Thank you.\
+    ';
+    $("#gradingsheet").html('');
+    config = {
+        'message':$balmessage,
+        'type':'info'
+    }
+    message_handler(config);
 
-          $balmessage = '\
-          <h2>\
-          You must settle your remaining balance in order to view your grades.<br><br>\
-          </h2>\
-          <h3>\
-          View your balance <a href="<?php echo base_url(); ?>index.php/Student/Balance"><u>Here</u></a>\
-          </h3>\
-          <hr>\
-          Proceed to the Accounting office for more questions, Thank you.\
-          ';
-
-
-          $('#alignment').html($balmessage);
-
-      }
 
 }
 
