@@ -7,7 +7,7 @@ class Student extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->library('wirecard');
-		$this->load->library('aub');
+		$this->load->library('Aub');
 	}
 	public function index()
 	{
