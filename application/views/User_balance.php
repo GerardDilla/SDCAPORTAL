@@ -103,6 +103,27 @@ $hide = "";
         </tr>
         </tbody>
     </table>
+    <div style="text-align:center">
+      <form id="payment_form" action="<?php echo base_url(); ?>index.php/Student/paymentconfirm" method="post"/>
+        <input type="hidden" name="access_key" value="19523d6302043fbfb2eaef3f937611a9">
+        <input type="hidden" name="profile_id" value="AC8571E2-3FDB-4488-8FF7-6707B6ABF93A">
+        <input type="hidden" name="transaction_uuid" value="<?php echo uniqid() ?>">
+        <input type="hidden" name="signed_field_names" value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,auth_trans_ref_no,reference_number,amount,currency">
+        <input type="hidden" name="unsigned_field_names">
+        <input type="hidden" name="signed_date_time" value="<?php echo gmdate("Y-m-d\TH:i:s\Z"); ?>">
+        <input type="hidden" name="locale" value="en">
+        <input type="hidden" name="transaction_type" value="sale">
+        <input type="hidden" name="auth_trans_ref_no" value="1223123">
+        <input type="hidden" name="reference_number" value="1223123">
+        <input type="hidden" name="amount" id="pay_amount" value="">
+        <input type="hidden" name="currency" value="PHP">
+        <input type="hidden" name="decision_reason_code " value="100 ">
+        <input type="hidden" name="payer_authentication_reason_code " value="100 ">
+        <input type="hidden" name="auth_code" value="">
+        <button type="submit" id="submit" value="Confirm" class="btn btn-info btn-lg">PAY NOW</button>
+      </form>
+    </div>
+    
       
       
   </div>
@@ -112,13 +133,14 @@ $hide = "";
 <!-- Balance API Handler -->
 <script>
 $(document).ready(function() {
+    $('#submit').hide();
     Init_BalanceAPI('https://www.stdominiccollege.edu.ph/SDCALMSv2/index.php/API/BalanceAPI','<?php echo md5($this->session->userdata('Reference_Number')); ?>');
     //Init_BalanceAPI('http://10.0.0.52/SDCALMSv2/index.php/API/BalanceAPI','<?php echo md5($this->session->userdata('Reference_Number')); ?>');
 });
 </script>
 <!-- Balance API Handler -->
 
-<script>senpai1320
+<script>
 
 
 function Init_BalanceAPI(url='',refnum='')
@@ -213,6 +235,8 @@ function balance_display(resultdata)
     $('#sem_total_balance').html(resultdata['Semestral_Balance']);
     $('#previous_balance').html(resultdata['Previous_Balance']);
     $('#outstanding_balance').html(resultdata['Outstanding_Balance']);
+    $('#pay_amount').val(resultdata['Outstanding_Balance']);
+    //$("input[name='reference_number']").val(new Date().getTime());
 
 }
 
@@ -225,6 +249,7 @@ function balance_display(resultdata)
   });
   $(document).ajaxStop(function() {
   $(".searchloader").hide();
+  $('#submit').show();
   });
 </script>
 <!-- AJAX loading -->

@@ -43,7 +43,6 @@
 </div>
 -->
 <!-- Privacy Policy -->
-<!--
 <div class="modal fade" id="privacy_policy_modal"  tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -90,7 +89,6 @@
 		</div>
 	</div>
 </div>
--->
 <!-- /Privacy Policy -->
 <!-- Privacy Policy Script -->
 <script>

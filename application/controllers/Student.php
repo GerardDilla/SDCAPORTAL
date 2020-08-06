@@ -7,7 +7,7 @@ class Student extends CI_Controller {
     {
 		parent::__construct();
 		$this->load->library('wirecard');
-		
+		$this->load->library('aub');
 	}
 	public function index()
 	{
@@ -23,7 +23,7 @@ class Student extends CI_Controller {
 		
 		if($data['logged'] == 1){
 			
-			redirect('index.php/Student/event','refresh');
+			redirect('event');
 			
 			}
 		else{
@@ -44,7 +44,7 @@ class Student extends CI_Controller {
 		if($data['pass'] == 1){
 			
 			
-			redirect('index.php/Student/event','refresh');
+			redirect('event');
 
 		}
 		else{
@@ -67,7 +67,8 @@ class Student extends CI_Controller {
 			$this->load->view('User_header',$data);
 			$this->load->view('User_profile',$data);
 			$this->load->view('User_footer');
-			}
+
+		}
 		else{
 			$data['error'] = "You must Login first";
 			$this->load->view('Portalhome',$data);
@@ -92,8 +93,10 @@ class Student extends CI_Controller {
 
 			
 			$data['resultSY'] = $this->Grades_model->getSY();
+			/*
 			$data['Grade_Output'] = $this->Grades_model->getGrades();
 			$data['All_Grades'] = $this->Grades_model->AllGrades();
+			*/
 	
 			if($data['pass'] == 1){
 				
@@ -199,12 +202,10 @@ class Student extends CI_Controller {
 		foreach($totalpaidsem->result_array() as $totalpaidsem_row){
 			$sempaid = $totalpaidsem_row['AmountofPayment'];
 		}
-		
 		$data['Outstanding_Balance'] = $ob-$tp;
 		$data['Semestral_Balance'] = $sembal;
 		$data['Sem_total_Paid'] = $sempaid;
 		$data['Total_Paid'] = $sembal - $sempaid;
-
 		*/
 
 
@@ -422,7 +423,7 @@ class Student extends CI_Controller {
 			
 			
 				
-			redirect('index.php/Student/User_settings','refresh');
+			redirect('User_settings');
 		
 
 			
@@ -506,7 +507,7 @@ class Student extends CI_Controller {
 		$data['active'] = "";
 		
 		if($data['pass'] == 1){
-		redirect('index.php/Student/Diary','refresh');
+		redirect('Diary');
 		}else{
 			$data['error'] = "You must Login first";
 			$this->load->view('Portalhome',$data);
@@ -515,12 +516,12 @@ class Student extends CI_Controller {
 	public function Diary_edit(){
 		$this->load->model('Diary_model');
 		$this->Diary_model->edit();
-		redirect('index.php/Student/Diary','refresh');
+		redirect('Diary');
 		}
 	public function Diary_delete(){
 		$this->load->model('Diary_model');
 		$this->Diary_model->delete();
-		redirect('index.php/Student/Diary','refresh');
+		redirect('Diary');
 		}	
 	public function Diary_load(){
 		
@@ -568,14 +569,14 @@ class Student extends CI_Controller {
 		{
 		 $this->load->model('Notif');
 		 $this->Notif->delete_selected();
-		 redirect('index.php/Student/Notification','refresh');
+		 redirect('Notification');
 		 
 		}
 	public function delete_all()
 		{
 		 $this->load->model('Notif');
 		 $this->Notif->delete_all();
-		 redirect('index.php/Student/Notification','refresh');
+		 redirect('Notification');
 		 
 		}
 	public function Notification(){
@@ -718,7 +719,7 @@ class Student extends CI_Controller {
 		$this->User_login->TimeOut();
 		$this->session->unset_userdata('logged_in');
 		$this->session->unset_userdata('Reference_Number');
-		redirect('index.php/Student/Main','refresh');
+		redirect('Main');
 	}
 	//**************************LOGOUT****************************///
 	
@@ -796,7 +797,7 @@ class Student extends CI_Controller {
 	    
 	    $this->load->model('User_sate_form_model');
 	    $this->User_sate_form_model->Inserting();
-		redirect('index.php/Student/User_Faculty_Eval','refresh');
+		redirect('User_Faculty_Eval');
 		//$this->User_Faculty_Eval();
 	    	
 		
@@ -835,7 +836,7 @@ class Student extends CI_Controller {
                        
 	                     $this->load->model('User_cus_sat_model');
 				         $this->User_cus_sat_model->Evaluation_Insert();
-				        redirect('Student/Profile','refresh');
+				        redirect('Profile');
                          }
        
 	   ////// RMUSIC AND CUSTOM////
@@ -930,6 +931,60 @@ class Student extends CI_Controller {
 			$this->session->set_flashdata('message','Payment was cancelled');
 		}
 		redirect(base_url().'index.php/Student/Payment');
+		
+	}
+	public function paymentconfirm(){
+
+
+		$this->load->model('User_login');
+		$data['pass'] = $this->User_login->jumpcheck();
+		$data['error'] = "";
+		$data['active'] = "3";
+		$data['posts'] = "";
+		if($data['pass'] == 1){
+
+			//Setup of POST requests
+			foreach($_REQUEST as $name => $value){
+				$params[$name] = $value;
+			}
+			foreach($params as $name => $value) {
+				$data['posts'] .= "<input type=\"hidden\" id=\"" . $name . "\" name=\"" . $name . "\" value=\"" . $value . "\"/>\n";
+			}
+			$data['posts'] .= "<input type=\"hidden\" id=\"signature\" name=\"signature\" value=\"" . $this->aub->sign($params) . "\"/>\n";
+
+			//Sets up the payment link
+			$this->load->view('User_header',$data);
+			$this->load->view('User_aub_paymentconfirm',$data);
+			
+		}else{
+
+			$data['error'] = "You must Login first";
+			$this->load->view('Portalhome',$data);
+			
+		}
+
+		
+
+		/*
+		echo '<fieldset id="confirmation"><legend>Review Payment Details</legend>';
+		foreach($params as $name => $value){
+			echo "<div>";
+			echo "<b class=\"fieldName\">" . $name . "</b>: <span class=\"fieldValue\">" . $value . "</span>";
+			echo "</div>\n";
+		}
+		echo '</fieldset>';
+		*/
+		/*
+		echo '<form id="payment_confirmation" action="https://testsecureacceptance.cybersource.com/pay" method="post"/>';
+		foreach($params as $name => $value) {
+            echo "<input type=\"text\" id=\"" . $name . "\" name=\"" . $name . "\" value=\"" . $value . "\"/>\n";
+			echo '<br>';
+		}
+        echo "<input type=\"text\" id=\"signature\" name=\"signature\" value=\"" . $this->aub->sign($params) . "\"/>\n";
+		echo '<br>';
+		echo '<button type="submit" id="submit" value="Confirm" class="btn btn-info btn-lg">PAY NOW</button>';
+		echo '</form>';
+		*/
 		
 	}
 
