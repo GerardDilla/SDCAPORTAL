@@ -25,19 +25,19 @@ $hide = "";
         <tbody>
           <tr>
             <td style="background-color:#55c2ac; color:#FFF;">Student Number</td>
-            <td style="font-weight: 700; color: #800; text-align:left;">12312312312</td>
+            <td style="font-weight: 700; color: #800; text-align:left;"><?php echo $this->session->userdata('Student_Number'); ?></td>
           </tr>
           <tr>
             <td style="background-color:#55c2ac; color:#FFF;">School Year</td>
-            <td style="font-weight: 700; color: #800; text-align:left;">2020 - 2021</td>
+            <td style="font-weight: 700; color: #800; text-align:left;"><?php echo $Bal_Schoolyear; ?></td>
           </tr>
           <tr>
             <td style="background-color:#55c2ac; color:#FFF;">Semester</td>
-            <td style="font-weight: 700; color: #800; text-align:left;">FIRST</td>
+            <td style="font-weight: 700; color: #800; text-align:left;"><?php echo $Bal_Semester; ?></td>
           </tr>
           <tr>
             <td style="background-color:#55c2ac; color:#FFF;">Amount (PHP)</td>
-            <td style="font-weight: 700; color: #800; text-align:left;">100</td>
+            <td style="font-weight: 700; color: #800; text-align:left;"><?php echo $amount; ?></td>
           </tr>
         </tbody>
     </table>

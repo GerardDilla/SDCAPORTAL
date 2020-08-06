@@ -120,7 +120,9 @@ $hide = "";
         <input type="hidden" name="decision_reason_code " value="100 ">
         <input type="hidden" name="payer_authentication_reason_code " value="100 ">
         <input type="hidden" name="auth_code" value="">
-        <button type="submit" id="submit" value="Confirm" class="btn btn-info btn-lg">PAY NOW</button>
+        <?php if($this->session->userdata('Student_Number') == '20122411'): ?>
+          <button type="submit" id="submit" value="Confirm" class="btn btn-info btn-lg">PAY NOW</button>
+        <?php endIf; ?>
       </form>
     </div>
     

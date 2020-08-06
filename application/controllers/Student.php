@@ -937,10 +937,18 @@ class Student extends CI_Controller {
 
 
 		$this->load->model('User_login');
+		$this->load->model('Balance_model');
 		$data['pass'] = $this->User_login->jumpcheck();
 		$data['error'] = "";
 		$data['active'] = "3";
 		$data['posts'] = "";
+
+		$legend = $this->Balance_model->getLegend();
+		$data['Bal_Schoolyear'] = $legend[0]['School_Year'];
+		$data['Bal_Semester'] = $legend[0]['Semester'];
+		if(empty($_REQUEST)){
+			redirect(base_url().'index.php/Student/balance');
+		}
 		if($data['pass'] == 1){
 
 			//Setup of POST requests
@@ -951,7 +959,7 @@ class Student extends CI_Controller {
 				$data['posts'] .= "<input type=\"hidden\" id=\"" . $name . "\" name=\"" . $name . "\" value=\"" . $value . "\"/>\n";
 			}
 			$data['posts'] .= "<input type=\"hidden\" id=\"signature\" name=\"signature\" value=\"" . $this->aub->sign($params) . "\"/>\n";
-
+			$data['amount'] = $params['amount'];
 			//Sets up the payment link
 			$this->load->view('User_header',$data);
 			$this->load->view('User_aub_paymentconfirm',$data);
