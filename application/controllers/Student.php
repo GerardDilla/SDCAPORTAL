@@ -23,7 +23,7 @@ class Student extends CI_Controller {
 		
 		if($data['logged'] == 1){
 			
-			redirect('event');
+			redirect(base_url().'index.php/Student/event');
 			
 			}
 		else{
@@ -44,7 +44,7 @@ class Student extends CI_Controller {
 		if($data['pass'] == 1){
 			
 			
-			redirect('event');
+			redirect(base_url().'index.php/Student/event');
 
 		}
 		else{
@@ -423,7 +423,7 @@ class Student extends CI_Controller {
 			
 			
 				
-			redirect('User_settings');
+			redirect(base_url().'index.php/Student/User_settings');
 		
 
 			
@@ -507,7 +507,7 @@ class Student extends CI_Controller {
 		$data['active'] = "";
 		
 		if($data['pass'] == 1){
-		redirect('Diary');
+		redirect(base_url().'index.php/Student/Diary');
 		}else{
 			$data['error'] = "You must Login first";
 			$this->load->view('Portalhome',$data);
@@ -516,12 +516,12 @@ class Student extends CI_Controller {
 	public function Diary_edit(){
 		$this->load->model('Diary_model');
 		$this->Diary_model->edit();
-		redirect('Diary');
+		redirect(base_url().'index.php/Student/Diary');
 		}
 	public function Diary_delete(){
 		$this->load->model('Diary_model');
 		$this->Diary_model->delete();
-		redirect('Diary');
+		redirect(base_url().'index.php/Student/Diary');
 		}	
 	public function Diary_load(){
 		
@@ -569,14 +569,14 @@ class Student extends CI_Controller {
 		{
 		 $this->load->model('Notif');
 		 $this->Notif->delete_selected();
-		 redirect('Notification');
+		 redirect(base_url().'index.php/Student/Notification');
 		 
 		}
 	public function delete_all()
 		{
 		 $this->load->model('Notif');
 		 $this->Notif->delete_all();
-		 redirect('Notification');
+		 redirect(base_url().'index.php/Student/Notification');
 		 
 		}
 	public function Notification(){
@@ -719,7 +719,7 @@ class Student extends CI_Controller {
 		$this->User_login->TimeOut();
 		$this->session->unset_userdata('logged_in');
 		$this->session->unset_userdata('Reference_Number');
-		redirect('Main');
+		redirect(base_url().'index.php/Student/Main');
 	}
 	//**************************LOGOUT****************************///
 	
@@ -797,7 +797,7 @@ class Student extends CI_Controller {
 	    
 	    $this->load->model('User_sate_form_model');
 	    $this->User_sate_form_model->Inserting();
-		redirect('User_Faculty_Eval');
+		redirect(base_url().'index.php/Student/User_Faculty_Eval');
 		//$this->User_Faculty_Eval();
 	    	
 		
@@ -836,7 +836,7 @@ class Student extends CI_Controller {
                        
 	                     $this->load->model('User_cus_sat_model');
 				         $this->User_cus_sat_model->Evaluation_Insert();
-				        redirect('Profile');
+				        redirect(base_url().'index.php/Student/Profile');
                          }
        
 	   ////// RMUSIC AND CUSTOM////
