@@ -233,7 +233,7 @@ class Student extends CI_Controller {
 		$data['pass'] = $this->User_login->jumpcheck();
 		
 		$this->load->model('Schedule_model');
-		$data['Schedule_Output'] = $this->Schedule_model->getsched();
+		//$data['Schedule_Output'] = $this->Schedule_model->getsched();
 		$data['SYlist'] = $this->Schedule_model->SYchoice();
 		$data['error'] = "";
 		$data['active'] = "4";

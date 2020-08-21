@@ -20,7 +20,7 @@
               </h4>
             </div>
             </a>
-        <div id="collapse1" class="panel-collapse collapse">
+        <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body">
             <form action="" method="post" style="margin-top:30px;">
               <div class="form-group">
@@ -45,7 +45,7 @@
                   </select>
                 </div>
               </div>
-              <button id="btn_appear" class="btn center-block" style="margin:auto; margin-bottom:30px; margin-top:20px; width:100px; display:none;	" name="submit" id="submitD" type="submit">
+              <button id="btn_appear" class="btn center-block" style="margin:auto; margin-bottom:30px; margin-top:20px; width:100px; display:none;	" name="submit" id="submitD" type="button">
               Select
               </button>
             </form>
@@ -57,12 +57,27 @@
     <!--accordion--!--> 
     
     <!--CONTENT--!-->
-    
-    <?php
-	
-		echo $Schedule_Output;
-		
-	?>
+
+    <div class="col-md-12">
+        <section class="panel shadowed-box">
+            <div class="panel-body">
+            <table class="table table-bordered table-striped mb-none" id="schedule_main">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Title</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                        <th>Instructor</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule_body">
+
+                </tbody>
+            </table>
+            </div>
+        </section> 
+    </div>
     
     <button class="btn btn-success center-block" style="margin:auto; margin-bottom:30px; margin-top:50px; display:none;" 
 	data-toggle="modal" data-target="#myModal"> <span class="glyphicon glyphicon-print"> </span> </button>
@@ -80,6 +95,15 @@
   
 </div>
 <!--BODY--!--> 
+
+<script>
+    $(document).ready(function() {
+        $("#btn_appear").click(function() {
+            Init_ScheduleAPI('https://www.stdominiccollege.edu.ph/SDCALMSv2/index.php/API/ScheduleAPI','<?php echo md5($this->session->userdata('Reference_Number')); ?>');
+        });
+    });
+</script>
+
 <script>
 function showcont(str) {
   var xhttp;
@@ -103,4 +127,87 @@ function showcont(str) {
   btn_appear.style.display="block";	
   
 }
+
+
+
+function Init_ScheduleAPI(url='',refnum='')
+{   
+    //console.log(url);
+    if(url == ''){
+
+        alert('You must provide the API URL');
+        return;
+    }
+    if(refnum == ''){
+       
+
+        alert('No Token found');
+        return;
+    }
+    if($('#Sched_sy').val() == ''){
+
+        alert('You must provide School Year');
+        return;
+    }
+    if($('#Sched_sem').val() == ''){
+
+        alert('You must provide Semester');
+        return;
+
+    }
+
+    
+    ajax = $.ajax({
+        url: url,
+        type: 'GET',
+        data: {
+            Reference_Number: refnum,
+            School_Year: $('#sel1').val(),
+            Semester: $('#sel2').val()
+        },
+        success: function(response){
+
+            result = JSON.parse(response);
+            if(result['ResultCount']  != 0){
+                console.log(result);
+                //grading_display(result['Output']);
+
+                //display_sched_table(result['data']);
+                resultdata = result['data'];
+                $('#schedule_body').html('');
+                $.each(resultdata, function(index, result) 
+                {
+                    
+                    $('#schedule_body').append('\
+                    <tr>\
+                        <td>'+result['Course_Code']+'</td>\
+                        <td>'+result['Course_Title']+'</td>\
+                        <td>'+result['Day']+'</td>\
+                        <td>'+result['Time']+'</td>\
+                        <td>'+result['Instructor']+'</td>\
+                    </tr>\
+                    ');
+
+                });
+
+            }else{
+
+                $('#schedule_body').html('');
+                alert(result['ErrorMessage']);
+                //message_handler(result['ErrorMessage'],'warning');
+            }
+
+        },
+        fail: function(){
+
+            alert('Error: request failed');
+            return;
+
+        }
+    });
+    
+}
 </script> 
+
+
+
