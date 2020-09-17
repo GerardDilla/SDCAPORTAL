@@ -234,7 +234,7 @@ function balance_display(resultdata)
     $('#midtermbalance').html(resultdata['MidtermBalance']);
     $('#finalsbalance').html(resultdata['FinalsBalance']);
 
-    $('#sem_balance').html(resultdata['Semestral_Balance']);
+    $('#sem_balance').html(resultdata['Semestral_Fee']);
     $('#sem_paid').html(resultdata['Semestral_Paid']);
     $('#sem_total_balance').html(resultdata['Semestral_Balance']);
     $('#previous_balance').html(resultdata['Previous_Balance']);
