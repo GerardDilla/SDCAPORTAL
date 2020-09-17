@@ -519,42 +519,7 @@ $fileT = './Profile/';
 <!--Notif--!-->
 
 <script type="text/javascript" charset="utf-8">
-/*
-    function addmsg(msg){
 
-        $("#messages").append(msg);
-    }
-	function dismiss(elem){
-		
-		$(elem).parent().hide();
-		
-		
-		}
-    function waitForMsg(){
- 
-        $.ajax({
-            type: "GET",
-            url: "<?php echo base_url() ?>index.php/Student/Notif",
-
-            async: true, /* If set to non-async, browser shows page as "Loading.."*/
-            cache: false,
-            timeout:50000, /* Timeout in ms */
-
-            success: function(data){ /* called when request to barge.php completes */
-                addmsg(data); /* Add response to a .msg div (with the "new" class)*/
-                setTimeout(
-                    waitForMsg, /* Request next message */
-                    5000 /* ..after 1 seconds */
-                );
-            },
-           
-        });
-    };
-
-    $(document).ready(function(){
-        waitForMsg(); /* Start the inital request */
-    });
-    */
 </script>
 
 <script type="text/javascript" charset="utf-8">

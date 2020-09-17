@@ -222,10 +222,10 @@ function Init_BalanceAPI(url='',refnum='')
 function balance_display(resultdata)
 {   
 
-    $('#uponregistration').html(resultdata['InitialPayment']);
-    $('#prelim').html(resultdata['Prelim']);
-    $('#midterm').html(resultdata['Midterm']);
-    $('#finals').html(resultdata['Finals']);
+    $('#uponregistration').html(resultdata['UponRegistrationBalance']);
+    $('#prelim').html(resultdata['PrelimBalance']);
+    $('#midterm').html(resultdata['MidtermBalance']);
+    $('#finals').html(resultdata['FinalsBalance']);
 
     $('#uponregistrationbalance').html(resultdata['UponRegistrationBalance']);
     $('#prelimbalance').html(resultdata['PrelimBalance']);
