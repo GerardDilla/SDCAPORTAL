@@ -188,7 +188,9 @@ function Init_BalanceAPI(url='',refnum='')
         url: url,
         type: 'GET',
         data: {
-            Reference_Number: refnum
+            Reference_Number: refnum,
+            School_Year:$('#SYlegend').val(),
+            Semester:$('#Semlegend').val()
         },
         success: function(response){
 
@@ -222,10 +224,10 @@ function Init_BalanceAPI(url='',refnum='')
 function balance_display(resultdata)
 {   
 
-    $('#uponregistration').html(resultdata['UponRegistrationBalance']);
-    $('#prelim').html(resultdata['PrelimBalance']);
-    $('#midterm').html(resultdata['MidtermBalance']);
-    $('#finals').html(resultdata['FinalsBalance']);
+    $('#uponregistration').html(resultdata['InitialPayment']);
+    $('#prelim').html(resultdata['Prelim']);
+    $('#midterm').html(resultdata['Midterm']);
+    $('#finals').html(resultdata['Finals']);
 
     $('#uponregistrationbalance').html(resultdata['UponRegistrationBalance']);
     $('#prelimbalance').html(resultdata['PrelimBalance']);
