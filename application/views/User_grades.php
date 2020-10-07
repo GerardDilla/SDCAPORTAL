@@ -294,7 +294,7 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
                             console.log(balresult['Output']['Chosen_Schoolyear']+':'+balresult['Output']['Chosen_Semester']);
                             if(balresult['Output']['Chosen_Schoolyear'] == legendsy){
                                 //alert('halo');
-                                if(balresult['Output']['Chosen_Semester'] == legendsem)){
+                                if(balresult['Output']['Chosen_Semester'] == legendsem){
                                     console.log('Current Sem');
                                     return;
                                 }else{
