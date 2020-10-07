@@ -290,8 +290,10 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
                     if(SemestralData.length != 0){
 
                         if(SemestralData[0]['balance'] > 1){
-
+                            console.log(legendsem+'-'+legendsy);
+                            console.log(balresult['Output']['Chosen_Schoolyear']+':'+balresult['Output']['Chosen_Semester']);
                             if(balresult['Output']['Chosen_Schoolyear'] == legendsy && balresult['Output']['Chosen_Semester'] == legendsem){
+                                alert('halo');
                                 return;
                             }else{
                                 balance_stopper();
