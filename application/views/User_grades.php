@@ -292,10 +292,16 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
                         if(SemestralData[0]['balance'] > 1){
                             console.log(legendsem+'-'+legendsy);
                             console.log(balresult['Output']['Chosen_Schoolyear']+':'+balresult['Output']['Chosen_Semester']);
-                            if(balresult['Output']['Chosen_Schoolyear'] == legendsy && balresult['Output']['Chosen_Semester'] == legendsem){
+                            if(balresult['Output']['Chosen_Schoolyear'] == legendsy){
                                 //alert('halo');
-                                console.log('matched');
-                                return;
+                                if(balresult['Output']['Chosen_Semester'] == legendsem)){
+                                    console.log('Current Sem');
+                                    return;
+                                }else{
+                                    balance_stopper();
+                                    $('#gradingsheet').html('');  
+                                }
+
                             }else{
                                 balance_stopper();
                                 $('#gradingsheet').html('');
