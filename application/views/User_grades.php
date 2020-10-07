@@ -282,35 +282,35 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
                 BalanceChecker = Init_BalanceAPI(balanceapi,input);
                 BalanceChecker.done(function(balresult){
 
-                    legendsem ="<?php echo $Bal_Schoolyear; ?>";
-                    legendsy ="<?php echo $Bal_Semester; ?>";
+                    legendsem = $('#SYlegend').val();
+                    legendsy = $('#Semlegend').val();
+
                     balresult = JSON.parse(balresult);
                     SemestralData = balresult['Output']['SemestralData'];
                     console.log(SemestralData);
                     if(SemestralData.length != 0){
 
-                        if(SemestralData[0]['balance'] > 1){
-                            console.log(legendsem+'-'+legendsy);
-                            console.log(balresult['Output']['Chosen_Schoolyear']+':'+balresult['Output']['Chosen_Semester']);
-                            if(balresult['Output']['Chosen_Schoolyear'] == legendsy){
-                                //alert('halo');
-                                if(balresult['Output']['Chosen_Semester'] == legendsem){
-                                    console.log('Current Sem');
-                                    return;
-                                }else{
-                                    balance_stopper();
-                                    $('#gradingsheet').html('');  
-                                }
+                        console.log(legendsem+'-'+legendsy);
+                        console.log(balresult['Output']['Chosen_Schoolyear']+':'+balresult['Output']['Chosen_Semester']);
+                        if(balresult['Output']['Chosen_Schoolyear'] == legendsy){
 
-                            }else{
-                                balance_stopper();
-                                $('#gradingsheet').html('');
+                            if(balresult['Output']['Chosen_Semester'] == legendsem){
+                                console.log('Current Sem');
+                                return;
                             }
 
-                        }else{
-                            $('.message_box').html('');
-                            grading_display(result['data']);
                         }
+                        if(SemestralData[0]['balance'] > 1){
+
+                            balance_stopper();
+                            $('#gradingsheet').html('');
+                            return;
+
+                        }
+
+                        $('.message_box').html('');
+                        grading_display(result['data']);
+                        
                         
 
                     }else{
