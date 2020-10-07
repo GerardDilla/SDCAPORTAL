@@ -282,20 +282,26 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
                 BalanceChecker = Init_BalanceAPI(balanceapi,input);
                 BalanceChecker.done(function(balresult){
 
-                    legendsem = $('#SYlegend').val();
-                    legendsy = $('#Semlegend').val();
 
                     balresult = JSON.parse(balresult);
                     SemestralData = balresult['Output']['SemestralData'];
+                    
+                    legendsem = $('#Semlegend').val();
+                    legendsy = $('#SYlegend').val();
+                    chosensem = balresult['Output']['Chosen_Semester'];
+                    chosensy = balresult['Output']['Chosen_Schoolyear'];
+
                     console.log(SemestralData);
                     if(SemestralData.length != 0){
 
                         console.log(legendsem+'-'+legendsy);
-                        console.log(balresult['Output']['Chosen_Schoolyear']+':'+balresult['Output']['Chosen_Semester']);
-                        if(balresult['Output']['Chosen_Schoolyear'] == legendsy && balresult['Output']['Chosen_Semester'] == legendsem){
-                            
-                            console.log('Current Sem');
+                        console.log(chosensy+':'+chosensem);
+                        if(chosensy == legendsy && chosensem == legendsem){
+
+                            $('.message_box').html('');
+                            grading_display(result['data']);
                             return;
+
                         }
                         if(SemestralData[0]['balance'] > 1){
 
