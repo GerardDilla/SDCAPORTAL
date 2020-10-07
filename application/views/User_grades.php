@@ -268,7 +268,8 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
         School_Year: $('#Schoolyear_Choice').val(),
         Semester: $('#sel2').val()
     }
-    
+
+
     ajax = $.ajax({
         url: gradingapi,
         type: 'GET',
@@ -281,14 +282,22 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
                 BalanceChecker = Init_BalanceAPI(balanceapi,input);
                 BalanceChecker.done(function(balresult){
 
+                    legendsem ="<?php echo $Bal_Schoolyear; ?>";
+                    legendsy ="<?php echo $Bal_Semester; ?>";
                     balresult = JSON.parse(balresult);
                     SemestralData = balresult['Output']['SemestralData'];
                     console.log(SemestralData);
                     if(SemestralData.length != 0){
 
                         if(SemestralData[0]['balance'] > 1){
-                            balance_stopper();
-                            $('#gradingsheet').html('');
+
+                            if(balresult['Output']['Chosen_Schoolyear'] == legendsy && balresult['Output']['Chosen_Semester'] == legendsem){
+                                return;
+                            }else{
+                                balance_stopper();
+                                $('#gradingsheet').html('');
+                            }
+
                         }else{
                             $('.message_box').html('');
                             grading_display(result['data']);
