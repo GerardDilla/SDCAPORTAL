@@ -293,7 +293,8 @@ function Init_GradingAPI(gradingapi='',balanceapi,refnum='')
                             console.log(legendsem+'-'+legendsy);
                             console.log(balresult['Output']['Chosen_Schoolyear']+':'+balresult['Output']['Chosen_Semester']);
                             if(balresult['Output']['Chosen_Schoolyear'] == legendsy && balresult['Output']['Chosen_Semester'] == legendsem){
-                                alert('halo');
+                                //alert('halo');
+                                console.log('matched');
                                 return;
                             }else{
                                 balance_stopper();
