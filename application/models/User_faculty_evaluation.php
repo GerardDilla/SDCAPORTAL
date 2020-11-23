@@ -144,7 +144,7 @@ class User_faculty_evaluation extends CI_Model{
 						
 							
 		     	$check_evaluation = "
-			 	SELECT * FROM ie_evaluationresult WHERE Reference_Number ='$Reference_Number' AND instructor ='$instructor_name' AND Semester='$lg_sem' AND School_Year='$lg_sy'
+			 	SELECT * FROM ie_evaluationresult WHERE Reference_Number ='$Reference_Number' AND instructor ='$instructor_name' AND Semester='$lg_sem' AND School_Year='$lg_sy' AND instructor != 'TBA'
 										 
 										 ";
 				$check_result = $this->db->query($check_evaluation);
