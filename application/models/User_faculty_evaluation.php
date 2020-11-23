@@ -157,35 +157,50 @@ class User_faculty_evaluation extends CI_Model{
 										//EVALUATION CHECKER/BUTTON//
 											//EVALUATION CHECKER
 											if($check_result->num_rows() > 0){
-												
-											//echo 'evaluated<br>';
-											//BUTTON//
-			                                $Output .= '
-											
-										<form class="pull-right" style="">
-										<span style="color:green; font-size: 18px;  color: #008000;"> 
-										<i class="glyphicon glyphicon-ok"></i> EVALUATED 
-										</span>
-										</form>
-											
-										';	
-		                                    //BUTTON//
+										
+												//echo 'evaluated<br>';
+												//BUTTON//
+												$Output .= '
+													<form class="pull-right" style="">
+													<span style="color:green; font-size: 18px;  color: #008000;"> 
+													<i class="glyphicon glyphicon-ok"></i> EVALUATED 
+													</span>
+													</form>
+												';	
+												//BUTTON//
 											
 											}
 											else
 											{
 												
-											//echo 'not yet<br>';
-											//BUTTON//
-										     	$Output.='
-											<form method="post"action="User_Sate_Form" class="pull-right">
-			                             	<input name="pogi" type="hidden" value="'.$instructor_name.'">
-					                        <button type="submit"  class="btn btn-danger" >EVALUATE NOW
-							                <i class="fa fa-angle-double-right"></i> </button>
-			                                 </form>										
-											';
-											
-											 //BUTTON//	
+												if($instructor_name != 'TBA'){
+
+													//echo 'not yet<br>';
+													//BUTTON//
+													$Output.='
+													<form method="post"action="User_Sate_Form" class="pull-right">
+													<input name="pogi" type="hidden" value="'.$instructor_name.'">
+													<button type="submit"  class="btn btn-danger" >EVALUATE NOW
+													<i class="fa fa-angle-double-right"></i> </button>
+													</form>										
+													';
+													//BUTTON//	
+
+												}else{
+
+													//echo 'not yet<br>';
+													//BUTTON//
+													$Output.='
+													<form method="post"action="User_Sate_Form" class="pull-right">
+													<button type="button"  class="btn btn-default" >Unavailable: Instructor Not Set
+													<i class="fa fa-angle-double-right"></i> </button>
+													</form>										
+													';
+													//BUTTON//	
+
+												}
+
+
 											}
 											//EVALUATION CHECKER
 							           //EVALUATION CHECKER/BUTTON//
