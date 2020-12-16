@@ -66,7 +66,6 @@ $hide = "";
         </tbody>
     </table>
 
-
     <table class="table table-striped" style="color:#666">
         <thead>
             <tr>
@@ -103,6 +102,8 @@ $hide = "";
         </tr>
         </tbody>
     </table>
+
+    <!--
     <div style="text-align:center">
       <form id="payment_form" action="<?php echo base_url(); ?>index.php/Student/paymentconfirm" method="post"/>
         <input type="hidden" name="access_key" value="19523d6302043fbfb2eaef3f937611a9">
@@ -125,6 +126,13 @@ $hide = "";
         <?php endIf; ?>
       </form>
     </div>
+    -->
+    <div style="text-align:center">
+
+      <a href="https://stdominiccollege.edu.ph/SDCAPayment/" id="paymentlink" class="btn btn-info btn-lg" target="_blank">Pay Online</a>
+
+    </div>
+    
     
       
       
@@ -241,6 +249,10 @@ function balance_display(resultdata)
     $('#outstanding_balance').html(resultdata['Outstanding_Balance']);
     $('#pay_amount').val(resultdata['Outstanding_Balance']);
     //$("input[name='reference_number']").val(new Date().getTime());
+
+    if(resultdata['Outstanding_Balance'] <= 0){
+      $('#paymentlink').hide();
+    }
 
 }
 
