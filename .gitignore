@@ -53,3 +53,4 @@ application/config/database.php
 C_editor
 Profile
 Certificates
+application/views/User_Sate_Form.php
