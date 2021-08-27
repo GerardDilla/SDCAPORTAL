@@ -454,7 +454,7 @@ $fileT = './Profile/';
 
 
 ?>
-<div id="AccountThumbnail" class="img-thumbnail img-responsive" style="background-image: url(<?php echo base_url(); ?>Profile/<?php echo $picture; ?>?<?php echo filemtime($fileT); ?>)">
+<div id="AccountThumbnail" class="img-thumbnail img-responsive" style="background-image: url(<?php echo base_url(); ?>Profile/<?php echo $picture; ?>?<?php //echo filemtime($fileT); ?>)">
 
 <form action="<?php echo base_url();?>index.php/Student/user_settings" method="post">
 <button id="changepic" class="glyphicon glyphicon-pencil" type="submit" />
